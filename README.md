@@ -1,46 +1,19 @@
-# Getting Started with Create React App
+# About
+This project is a simple SPA application with React.
+The main goal here was to practice Amazon Web Services.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+So here is a breaf description of architecture.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. First of all - I used React to create front-end for application
+2. Before any work inside the app user needs to authorize. For authorization process (`Sign in`, `Sign up`, `Email verification`) I used `AWS Cognito` service.
+3. Inside, the application wants to receive some external data. To do that it sends HTTP request to created `AWS API Gateway`. Here are the possible requests:
+- `POST /compare-yourself` - to add personal data to compare
+- `DELETE /compare-yourself` - to delete personal data
+- `OPTIONS /compare-yourself` - for preflight request to check CORS
+- `GET /compare-yourself/:type` - type can be `all` or `single` that allows client to get all data or only authorized user data.
+- `OPTIONS /compare-yourself/:type` - for preflight request to check CORS
+4. After request was send `API Gateway` transforms the data using created models, verifies authorization and invokes `AWS Lambda Functions`.
+5. Inside of `Lambda` there is some logic to `get/delete/add` data to database.
+6. For database I used `AWS Dynamo DB` that is a NoSQL database from Amazon.
+7. All important data is hidden in `.env` files
+8. To deploy `React app` I used `Vercel` because its very fast and free.
