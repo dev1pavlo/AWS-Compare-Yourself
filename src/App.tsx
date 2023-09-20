@@ -7,15 +7,15 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { API_URL } from "./constants";
 import axios from "axios";
 
-console.log(config);
+// console.log(config);
 
-Amplify.configure({
-  Auth: {
-    region: config.REGION,
-    userPoolId: config.USER_POOL_ID,
-    userPoolWebClientId: config.USER_POOL_APP_CLIENT_ID,
-  },
-});
+// Amplify.configure({
+//   Auth: {
+//     region: config.REGION,
+//     userPoolId: config.USER_POOL_ID,
+//     userPoolWebClientId: config.USER_POOL_APP_CLIENT_ID,
+//   },
+// });
 
 interface ICompareData {
   age: number;
