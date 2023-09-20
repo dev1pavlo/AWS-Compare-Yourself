@@ -1,21 +1,10 @@
-import { Amplify, Auth } from "aws-amplify";
-import config from "./userPool";
+import { Auth } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { API_URL } from "./constants";
 import axios from "axios";
-
-// console.log(config);
-
-// Amplify.configure({
-//   Auth: {
-//     region: config.REGION,
-//     userPoolId: config.USER_POOL_ID,
-//     userPoolWebClientId: config.USER_POOL_APP_CLIENT_ID,
-//   },
-// });
 
 interface ICompareData {
   age: number;
@@ -65,15 +54,19 @@ function App() {
 
   useEffect(() => {
     async function getToken() {
-      const authToken = (await Auth.currentSession())
-        .getIdToken()
-        .getJwtToken();
+      try {
+        const session = await Auth.currentSession();
 
-      setToken(authToken);
+        if (session) {
+          const authToken = session.getIdToken().getJwtToken();
+
+          setToken(authToken);
+        }
+      } catch (e) {}
     }
 
     getToken();
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     const fetchData = async () => {
