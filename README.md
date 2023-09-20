@@ -1,10 +1,12 @@
+https://aws-compare-yourself.vercel.app/
+
 # About
 This project is a simple SPA application with React.
 The main goal here was to practice Amazon Web Services.
 
 So here is a breaf description of architecture.
 
-1. First of all - I used React to create front-end for application
+1. First of all - I used `React` to create front-end for application
 2. Before any work inside the app user needs to authorize. For authorization process (`Sign in`, `Sign up`, `Email verification`) I used `AWS Cognito` service.
 3. Inside, the application wants to receive some external data. To do that it sends HTTP request to created `AWS API Gateway`. Here are the possible requests:
 - `POST /compare-yourself` - to add personal data to compare
